@@ -58,6 +58,7 @@ struct ContentView: View {
                     Spacer()
                     
                     Button("Save", action: save)
+                        .disabled(isImageDisabled())
                 }
             }
             .padding([.horizontal, .bottom])
@@ -79,6 +80,13 @@ struct ContentView: View {
             }
         }
         
+    }
+    
+    func isImageDisabled() -> Bool {
+        if let image = image {
+            return false
+        }
+        return true
     }
     
     func loadImage() {
