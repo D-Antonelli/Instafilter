@@ -76,6 +76,7 @@ struct ContentView: View {
                 Button("Sepia Tone") { setFilter(CIFilter.sepiaTone()) }
                 Button("Unsharp Mask") { setFilter(CIFilter.unsharpMask()) }
                 Button("Vignette") { setFilter(CIFilter.vignette()) }
+                Button("Bloom") { setFilter(CIFilter.bloom()) }
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -83,7 +84,7 @@ struct ContentView: View {
     }
     
     func isImageDisabled() -> Bool {
-        if let image = image {
+        if let _ = image {
             return false
         }
         return true
@@ -119,6 +120,7 @@ struct ContentView: View {
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
         if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
         if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
+
         
         guard let outputImage = currentFilter.outputImage else { return }
         
